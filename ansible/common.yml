@@ -1,0 +1,4 @@
+- name: Common configuration for all servers
+  hosts: all
+  roles:
+  - { role: NLCR.common, packages: { name: [ git, vim, unzip ], state: latest } }

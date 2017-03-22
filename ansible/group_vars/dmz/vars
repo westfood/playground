@@ -1,0 +1,5 @@
+vlan_type: '{{ vault_vlan_type }}'
+vlan: '{{ vault_vlan }}'
+vlan_gateway: '{{ vault_vlan_gateway }}'
+vlan_dns: '{{ vault_vlan_dns }}'
+vlan_ntp: '{{ vault_vlan_ntp }}'

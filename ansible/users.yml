@@ -1,0 +1,30 @@
+- name: User access to OS and Apps
+  hosts: all
+  tasks:
+
+  - name: Passwordless sudo is enabled for wheel group
+    replace:
+      dest: /etc/sudoers
+      regexp: "{{ item.regexp }}"
+      replace: "{{ item.replace }}"
+      validate: 'visudo -cf %s'
+    with_items:
+      - { regexp: "^%wheel\tALL=[(]ALL[)]\tALL$", replace: "# %wheel\tALL=(ALL)\tALL" }
+      - { regexp: "^# %wheel\tALL=[(]ALL[)]\tNOPASSWD: ALL$", replace: "%wheel\tALL=(ALL)\tNOPASSWD: ALL"}
+
+  - name: Admins are part of wheel and users groups
+    user:
+      name: '{{ item.key }}'
+      comment: '{{ item.value.name }}, {{ item.value.mail }}'
+      uid: '{{ item.value.uid }}'
+      append: yes
+      groups: wheel,users
+      non_unique: yes
+    with_dict: '{{ admins }}'
+ 
+  - name: Admins SSH keys imported
+    authorized_key:
+      user: '{{ item.key }}'
+      state: present
+      key: '{{ item.value.key }} {{ item.value.mail }}'
+    with_dict: '{{ admins }}'

@@ -1,0 +1,12 @@
+[vagrant-machines]
+vagrant00 ansible_host=192.168.200.10 ansible_ssh_private_key_file=../vagrant/.vagrant/machines/vagrant00/virtualbox/private_key
+#vagrant01 ansible_host=192.168.200.11 ansible_ssh_private_key_file=../vagrant/.vagrant/machines/vagrant01/virtualbox/private_key
+#vagrant02 ansible_host=192.168.200.12 ansible_ssh_private_key_file=../vagrant/.vagrant/machines/vagrant02/virtualbox/private_key
+
+[vagrant]
+vagrant00
+
+[vagrant-machines:vars]
+ansible_ssh_user=vagrant
+ansible_become=True
+ansible_retry_files_save_path=.retry

@@ -1,0 +1,21 @@
+admins:
+    rudolf:
+      name: Rudolf Kreibich
+      mail: rudolf.kreibich@nkp.cz
+      uid: 1000
+      key: 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAklZs1w9aCjt5kuJyhQRUgYcmLWb7Ig5celywld68xKGXEqXWA6xeUwsr7dWI4n0rmi8n//8vqXR9grhtPzk2oM0EbzdnHzJPgw15d2L3vnJTRrTR4incaiQPbcpAcWEdh89lgsuuIjTwXnwSlVL/703JxVxetoAlBYSo2QvB5uU='
+    milos:
+      name: Miloš Bilwachs
+      mail: milos.bilwachs@nkp.cz
+      uid: 1001
+      key: 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIBuX0tI+PGbBsL5xMejKPg0obxZYyAjofQw9Vg9Jii7BMfQ1BLQV4RESo40l2dDeupGHBGje6IKiPAw6+vbmBfBYDLbkZEmvvG2FG+ATuodFlGhSuNUXiykollDFQ5i3no13IKnusAwuVfbHHPXVCM/pj1Sbwi3uzr/hQbnXGeshQ=='
+    zdenko:
+      name: Zdenko Vozár
+      mail: zdenko.vozar@nkp.cz
+      uid: 1002
+      key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDThzH98Wt+gj0MPrQ2h+OQq1hWOkZYcKIGMAPCipDLjkZ7R26LYg+kLP8qRQkmwgF07G7hnFXRC4a9uShoXqQhoqD/K5X+RLfGxQexgke9dU5W2aylb/JMJcmGIx9bQGS+/xFvweGkCg8UWDyQXuV0BQIeyNheHMb9pHP4m2E0kkmKYmSsCCq3BhI23XngCaEW6Bn1+kDuZlkLR/qjp6t6yFIzalSzYJFL/1hrS7l3dTCb2aQsDXAextOGOd4n3T9hjiJeZ/+m+57r39arqzOqBrxJ2JP7atgmh1sVgbohGvz2Q44j/2cZFpZP4EDuuipZ+gpeWMF0Nr4CjpgdTWDlTuRjaadH5VGQBN2wkNtL7e6O2Ene3+4HCYgelbXDgx5/Tfn3Eu24D34NXVD4PEPbQejLhbm6Ax9lHzX58706sp9y2zcXuROipwQTVDZNlYwl8hOXKUUFN6eB/sBXb3fa0OldS88Y8MhfLiOD2EAjSbJNQ5a3RMvK8p93ri30ViTj6nSGJlNBoBXFgaoL51u8peV/H5mAeH3/c934uERqLLmpsfvwAwLIrHA6tnTgcsY7r035wgQO5sr8tRRqlPUizqzyiyaLDId3d6sUHVsmEYsHG1h9e1fCzoQcdA8mXS0Gji/IzpUPryK34cUhG3pv7KZi2gfaTiEvTLFREtaERQ=='
+    ansible:
+      name: Ansible Automation
+      mail: rudolf.kreibich@nkp.cz
+      uid: 1020
+      key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCbs/dnR9FSzkITv6ujVEybaynYEqurRptWqrqfMheTxbZ81uJQwHtMEkaK8wvU2Bn610++nTKacg0y6BsWS6U7v91fG8PXaB9yZfQV+0+0uqUSFQXpVOIi9xfPTCDOW7PSBblLvb2IQZShPOPIr6k202K5E5bitrtqbjWOAFSYxQ6Z7fZjkVsNyGJn+qEKQP6hm96ih7XdBuCJm9Be6CQ8W0MVkpQv5S1H/pOeQR/k3VqfNl/Tunj6K0GgtWy/C1FCQ2Ce9he8jHJHSNBt8mnWRM3odQELmCNjL4d2VnvpIVR02eGUk8GqDAxZ1bnIHFO+zHQfcUa7JVSGniUNthnr'

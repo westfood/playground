@@ -1,0 +1,31 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  # For a complete reference, please see the online documentation at https://docs.vagrantup.com.
+  
+  # Customize VM
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+  
+  config.vm.box = "centos/7" # centos repo has SELinux enabled, thus should be closer to production env
+
+  {
+    'vagrant00'	=> '192.168.200.10',
+#    'vagrant01'	=> '192.168.200.11',
+#    'vagrant02'	=> '192.168.200.12',
+  }.each do |short_name, ip|
+      config.vm.define short_name do |host|
+        host.vm.network 'private_network', ip: ip
+        host.vm.hostname = "#{short_name}.nkp.cz"
+      end
+  end
+
+  # Provisioning with Ansible
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "../ansible/site.yml"
+    ansible.inventory_path = "../ansible/hosts-vagrant"
+    ansible.host_key_checking = "false"
+  end
+end

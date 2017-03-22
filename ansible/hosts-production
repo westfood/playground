@@ -1,0 +1,20 @@
+## SERVERS OVERVIEW
+## All groups are in group_vars/
+
+[vcenter]
+#servername ansible_host=1.1.1.1 vmware_name=vmwarename vmware_cpu=2 vmware_memory=8192 vmwware_size=40 hostname=nejaky
+
+## BASIC ROLES, all production servers should be in production, users.yml will otherwise use users from vagrant environment
+[production] 
+
+## NETWORK LOCATION
+
+[dmz]
+
+[servers]
+
+## VARIABLES
+
+[all:vars]
+ansible_ssh_user=ansible
+ansible_ssh_private_key_file=~/.ssh/id_rsa

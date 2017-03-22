@@ -1,0 +1,80 @@
+---
+- name: Tasks to do after fresh clone from teplate, resizing disk, restarting machine, expanding disks in LVM. Very destructive playbook!
+  hosts:
+  - 10.3.0.100
+
+  vars:
+    admins:
+        ansible:
+          name: Ansible Automation
+          mail: rudolf.kreibich@nkp.cz
+          uid: 1020
+          key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCbs/dnR9FSzkITv6ujVEybaynYEqurRptWqrqfMheTxbZ81uJQwHtMEkaK8wvU2Bn610++nTKacg0y6BsWS6U7v91fG8PXaB9yZfQV+0+0uqUSFQXpVOIi9xfPTCDOW7PSBblLvb2IQZShPOPIr6k202K5E5bitrtqbjWOAFSYxQ6Z7fZjkVsNyGJn+qEKQP6hm96ih7XdBuCJm9Be6CQ8W0MVkpQv5S1H/pOeQR/k3VqfNl/Tunj6K0GgtWy/C1FCQ2Ce9he8jHJHSNBt8mnWRM3odQELmCNjL4d2VnvpIVR02eGUk8GqDAxZ1bnIHFO+zHQfcUa7JVSGniUNthnr'
+
+  tasks:
+  - block:
+    - name: Passwordless sudo is enabled
+      replace:
+        dest: /etc/sudoers
+        regexp: "{{ item.regexp }}"
+        replace: "{{ item.replace }}"
+        validate: 'visudo -cf %s'
+      with_items:
+        - { regexp: "^%wheel\tALL=[(]ALL[)]\tALL$", replace: "# %wheel\tALL=(ALL)\tALL" }
+        - { regexp: "^# %wheel\tALL=[(]ALL[)]\tNOPASSWD: ALL$", replace: "%wheel\tALL=(ALL)\tNOPASSWD: ALL"}
+  
+    - name: Linux admins with passwordless sudo privileges
+      user:
+        name: '{{ item.key }}'
+        comment: '{{ item.value.name }}, {{ item.value.mail }}'
+        uid: '{{ item.value.uid }}'
+        append: yes
+        groups: wheel
+      with_dict: '{{ admins }}'
+  
+    - name: Admins SSH keys imported
+      authorized_key:
+        user: '{{ item.key }}'
+        state: present
+        key: '{{ item.value.key }} {{ item.value.mail }}'
+      with_dict: '{{ admins }}'
+  
+  - block:
+    - name: Destroy /dev/sda2 and recreate it with maximum size
+      shell: echo -e "d\n2\nn\np\n2\n\n\nt\n2\n8e\nw" | fdisk /dev/sda
+      ignore_errors: yes
+
+    - name: restart machine
+      shell: sleep 2 && shutdown -r now "Ansible recreated partition, restart necessary"
+      async: 1
+      poll: 0
+      ignore_errors: true
+
+    - name: Waiting for server to rise from restart!
+      local_action:
+        wait_for
+          port=22
+          host={{ ansible_hostname }}
+          state=started
+          delay=60
+          timeout=320
+          search_regex=OpenSSH
+          #          sleep=5
+      vars:
+        ansible_become: false
+  
+    - name: Extend physical volume
+      shell: pvresize /dev/sda2
+  
+    - name: rescan physical volumes
+      shell: pvscan
+              
+    - name: Extend Logical volume to max
+      shell: lvextend /dev/cl/root -l +100%FREE
+      ignore_errors: yes
+  
+    - name: Grow XFS to max
+      filesystem:
+        fstype: xfs
+        dev: /dev/mapper/cl-root
+        resizefs: yes

@@ -1,0 +1,3 @@
+admins: '{{ vault_admins }}'
+smtp_host: '{{ vault_smtp_host }}'
+ntp_servers: '{{ vault_ntp_servers }}'
