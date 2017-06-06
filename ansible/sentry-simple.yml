@@ -1,0 +1,6 @@
+- name: Database playbook
+  hosts: database
+  roles:
+  - { role: NLCR.postgresql, postgresql: [{ user: vagrant, pass: vagrant, db: sentry }] }
+  - { role: NLCR.redis }
+  - { role: NLCR.sentry, sentry: { user: vagrant, db_user: vagrant, db_pass: vagrant, db_name: sentry } }

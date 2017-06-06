@@ -1,0 +1,5 @@
+---
+- name: Certbot playbook
+  hosts: front
+  roles:
+   - NLCR.certbot

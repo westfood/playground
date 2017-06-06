@@ -1,0 +1,4 @@
+- name: Common configuration for all servers
+  hosts: vagrant00
+  roles:
+  - telusdigital.taiga

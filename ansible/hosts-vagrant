@@ -6,6 +6,15 @@ vagrant00 ansible_host=192.168.200.10 ansible_ssh_private_key_file=../vagrant/.v
 [vagrant]
 vagrant00
 
+[front]
+vagrant00
+
+[database]
+vagrant00
+
+[app]
+vagrant00
+
 [vagrant-machines:vars]
 ansible_ssh_user=vagrant
 ansible_become=True

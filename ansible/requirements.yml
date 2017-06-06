@@ -1,3 +1,7 @@
 # from galaxy
-- src: NLCR.common
-  version: v0.0.1
+#- src: NLCR.common
+#  version: v0.0.1
+- src: NLCR.sentry
+
+# from repo
+#- src: telusdigital.taiga

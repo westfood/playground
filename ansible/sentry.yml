@@ -1,0 +1,10 @@
+- name: Database playbook
+  hosts: database
+  roles:
+  - { role: NLCR.postgresql, postgresql: [{ user: vagrant, pass: vagrant, db: sentry }] }
+  - { role: NLCR.redis }
+
+- name: Application playbook
+  hosts: app
+  roles:
+  - { role: NLCR.sentry, sentry: { user: vagrant, port: 9000, db_user: vagrant, db_pass: vagrant, db_name: sentry, redis_host: 127.0.0.1, redist_port: 6379 } }
